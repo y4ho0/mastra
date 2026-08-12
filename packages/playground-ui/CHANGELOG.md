@@ -1,5 +1,26 @@
 # @mastra/playground-ui
 
+## 48.1.0-alpha.1
+
+### Minor Changes
+
+- `CopyButton` takes a `showToast` option, so a button whose icon already flips to a checkmark on success can skip the toast on top of it. ([#21350](https://github.com/mastra-ai/mastra/pull/21350))
+
+  ```tsx
+  <CopyButton content={message} showToast={false} />
+  ```
+
+### Patch Changes
+
+- Reworked the markdown renderer's typography. Headings, lists, blockquotes, tables and horizontal rules now follow one consistent rhythm, list markers and task-list checkboxes render as expected, and long tables scroll instead of stretching their container. ([#21355](https://github.com/mastra-ai/mastra/pull/21355))
+
+  Fenced code blocks now get syntax highlighting, a copy button and a frame of their own, and yaml, diff, css, html, xml and sql joined the highlighted languages, so fences in those languages are no longer plain text.
+
+- Updated dependencies [[`aa3e7be`](https://github.com/mastra-ai/mastra/commit/aa3e7be30f8addb0278ea74429f4df054517a287), [`90822db`](https://github.com/mastra-ai/mastra/commit/90822dba08fb2169c518e4a6d7f127c098eb46b8)]:
+  - @mastra/core@1.59.0-alpha.1
+  - @mastra/client-js@1.39.1-alpha.1
+  - @mastra/react@1.4.3-alpha.1
+
 ## 48.1.0-alpha.0
 
 ### Minor Changes

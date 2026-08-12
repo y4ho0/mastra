@@ -1,5 +1,23 @@
 # @mastra/factory
 
+## 0.6.1-alpha.1
+
+### Patch Changes
+
+- Chat messages now carry the time they were sent and a button that copies their text. Both sit under the message and only appear when you hover (or keyboard-focus) it, so the transcript stays clean. ([#21350](https://github.com/mastra-ai/mastra/pull/21350))
+
+- Trigger a fresh review pass when a push arrives on a pull request whose review card already finished Reviewing, and cancel any in-flight review run before dispatching the new one so the superseded pass stops consuming tokens. Re-review from Factory's own bot now also cancels the previous run. The platform-backed polling worker also feeds `synchronize` and `review_requested` events to the factory rules engine, so hosted Factory installations get re-reviews the same way direct-webhook installations do. ([#21356](https://github.com/mastra-ai/mastra/pull/21356))
+
+  A push (or bot re-review request) that returns a card from `done` back to `review` now dispatches the new `factory-rereview` skill instead of `factory-review`. The re-review pass is tuned for its context — reconcile the previous review against the pushed commits, flag defects the push itself introduced, take a fresh sweep over the PR as it now stands, then publish and transition — while running on the same terminal-handoff and untrusted-checkout contracts as `factory-review`. Cancellation and skill choice are decoupled: a superseded first-time review still dispatches `factory-review` on restart (no prior pass to reconcile), only re-entries from `done` get `factory-rereview`.
+
+- Fixed markdown rendering in the Factory chat. Bullet and numbered lists show their markers again instead of collapsing into blankly indented lines, and task lists, tables and blockquotes now render properly. Fenced code blocks go through the design-system code block, so they get syntax highlighting, a copy button and a readable surface, and inline code is legible on every background. ([#21355](https://github.com/mastra-ai/mastra/pull/21355))
+
+  The chat now uses the same markdown renderer as the Studio rather than its own copy, so both stay in sync from here on.
+
+- Updated dependencies [[`aa3e7be`](https://github.com/mastra-ai/mastra/commit/aa3e7be30f8addb0278ea74429f4df054517a287), [`90822db`](https://github.com/mastra-ai/mastra/commit/90822dba08fb2169c518e4a6d7f127c098eb46b8), [`90822db`](https://github.com/mastra-ai/mastra/commit/90822dba08fb2169c518e4a6d7f127c098eb46b8)]:
+  - @mastra/core@1.59.0-alpha.1
+  - @mastra/code-sdk@1.2.1-alpha.1
+
 ## 0.6.1-alpha.0
 
 ### Patch Changes
